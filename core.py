@@ -5,7 +5,7 @@ PENSION_RATE = 0.07; # 7% off bruto, must be at least 6%
 HEALTH_INS = [0.031, 0.05];
 HISHTALMUT_RATE = 0.025; #2.5% off bruto
 EMPLOYER_HISHTALMUT = 0.075;
-EMPLOYER_PENSION = 0.125;
+EMPLOYER_PENSION = 0.1483;
 SOCIAL_INS = [0.04, 0.07];
 AVG_INCOME = 9907;
 SIXTYPERC_AVG_INCOME = int(0.6 * AVG_INCOME); # social and health insurance fee blocks depend on 60% avg national income
@@ -43,7 +43,7 @@ socialInsFee = calc_ins_fee(brutoIncome, False);
 brutoAfterExpenses = brutoIncome - brutoIncome*(PENSION_RATE + HISHTALMUT_RATE) - healthInsFee - socialInsFee;
 netIncome = income_tax_deduction(brutoAfterExpenses);
 savings = brutoIncome*(PENSION_RATE + HISHTALMUT_RATE + EMPLOYER_HISHTALMUT + EMPLOYER_PENSION);
-print("net income is: " + str(netIncome) + "\nsavings are " + str(savings));
+print("net income is: " + str(int(netIncome)) + "\nsavings are " + str(int(savings)));
 
 
 
