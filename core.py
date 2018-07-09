@@ -5,7 +5,7 @@ PENSION_RATE = 0.07  # 7% off bruto, must be at least 6%
 HEALTH_INS = [0.031, 0.05]
 HISHTALMUT_RATE = 0.025  # 2.5% off bruto
 EMPLOYER_HISHTALMUT = 0.075
-EMPLOYER_PENSION = 0.1483  # 6% by law, and 8.33% severance fees
+EMPLOYER_PENSION = 0.1433  # 6% by law, and 8.33% severance fees
 SOCIAL_INS = [0.04, 0.07]
 AVG_INCOME = 9907
 SIXTYPERC_AVG_INCOME = int(0.6 * AVG_INCOME)  # social and health insurance fee blocks depend on 60% avg national income
@@ -29,7 +29,6 @@ def income_tax_deduction(bruto):
 
 # calculates fee for health or social insurance, flag true for health ins., flag false for social ins.
 def calc_ins_fee(bruto, flag):
-    # print(str(bruto) + " " + str(SIXTYPERC_AVG_INCOME))
     if bruto < SIXTYPERC_AVG_INCOME:
         return HEALTH_INS[0] * bruto if flag else SOCIAL_INS[0] * bruto
     res = HEALTH_INS[0] if flag else SOCIAL_INS[0]
