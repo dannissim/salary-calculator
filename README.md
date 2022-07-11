@@ -163,7 +163,7 @@ Project Link: [https://github.com/dannissim/salary-calculator](https://github.co
 [issues-shield]: https://img.shields.io/github/issues/dannissim/salary-calculator.svg?style=for-the-badge
 [issues-url]: https://github.com/dannissim/salary-calculator/issues
 [license-shield]: https://img.shields.io/github/license/dannissim/salary-calculator.svg?style=for-the-badge
-[license-url]: https://github.com/dannissim/salary-calculator/blob/master/LICENSE.txt
+[license-url]: https://github.com/dannissim/salary-calculator/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/dan-nissim-2558a785
 [product-screenshot]: images/screenshot.png
