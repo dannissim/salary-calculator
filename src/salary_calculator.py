@@ -1,95 +1,106 @@
 # app that calculates your monthly salary and your savings after taking off by-law expenses: Pension savings,
 # "Keren hishtalmut", Health insurance, income tax, social insurance.
-# Need to fix: max hishtalmut and pension deposit from bruto
-# should update tax bracket
-PENSION_RATE = 0.06  # 7% off bruto, must be at least 6%
-HEALTH_INS = [0.031, 0.05]
-HISHTALMUT_RATE = 0.025  # 2.5% off bruto
-EMPLOYER_HISHTALMUT = 0.075
+import typing
+
+import pydantic
+
+
+class Bracket(pydantic.BaseModel):
+    threshold: int
+    rate: float
+
+
+INCOME_TAX_BRACKETS = [
+    Bracket(threshold=0, rate=0.1),
+    Bracket(threshold=6450, rate=0.14),
+    Bracket(threshold=9240, rate=0.2),
+    Bracket(threshold=14840, rate=0.31),
+    Bracket(threshold=20620, rate=0.35),
+    Bracket(threshold=42910, rate=0.47),
+    Bracket(threshold=55270, rate=0.5)
+]
+SIXTY_PERCENT_OF_AVG_INCOME = 6331
+HEALTH_INSURANCE_BRACKETS = [
+    Bracket(threshold=0, rate=0.031),
+    Bracket(threshold=SIXTY_PERCENT_OF_AVG_INCOME, rate=0.05)
+]
+SOCIAL_INSURANCE_BRACKETS = [
+    Bracket(threshold=0, rate=0.004),
+    Bracket(threshold=SIXTY_PERCENT_OF_AVG_INCOME, rate=0.07)
+]
+POINT_WORTH = 223
+MAX_SALARY_TO_CALCULATE_INSURANCE_FEE = 45075
+MAX_NONTAXABLE_EMPLOYER_SEVERANCE = 2908
+MAX_NONTAXABLE_EMPLOYER_PENSION = 148
+MAX_SALARY_WITHOUT_TAX_ON_EMPLOYER_EDUCATION_FUND = 15712
+MAX_PENSION_DEPOSIT_TO_RECEIVE_TAX_DEDUCTION = 623.0
+
+TAX_DEDUCTION_RATE_FROM_PENSION_DEPOSIT = 0.35
+EMPLOYEE_EDUCATION_FUND_RATE = 0.025
+EMPLOYER_EDUCATION_FUND_RATE = 0.075
+EMPLOYEE_PENSION_RATE = 0.07
 EMPLOYER_PENSION = 0.065
-EMPLOYER_SEVER = 0.0833
+EMPLOYER_SEVERANCE_RATE = 0.0833
 DISCOUNT_POINTS = 2.25
-POINT_WORTH = 218
 DISCOUNT = DISCOUNT_POINTS * POINT_WORTH
-#   if employer deposits more than this amnt, the difference will be added to the income and tax will be paid
-MAX_EMPLOYER_SEVER = 2833
-#   you get 35% of your pension deposit as tax deduction, up to max pension deposit
-MAX_PENSION = 616
-PENSION_TAX_DEDUCTION = 0.35
-#   employer pension does not count as income for tax to be paid up to max employer pension, above this, the
-#   difference will be added to the salary for which income tax will be calculated
-MAX_EMPLOYER_PENSION = 148
-SOCIAL_INS = [0.004, 0.07]
-AVG_INCOME = 10273
-SIXTYPERC_AVG_INCOME = int(
-    0.6 * AVG_INCOME)  # social and health insurance fee blocks depend on 60% avg national income
-# INCOMETAX_THRESH = 4837
-TAX_BRACKET = [6310, 9050, 14530, 20200, 42030, 54130]
-TAX_RATES = [0.1, 0.14, 0.2, 0.31, 0.35, 0.47, 0.5]
-MAX_HISHTALMUT = 15712  # this is the max salary in which the there isn't income tax on employer deposit
-# this is the amount which the no income tax is paid on employer deposit in keren hishtalmut
-MAX_EMPLOYER_HISHTALMUT = EMPLOYER_HISHTALMUT * MAX_HISHTALMUT
-
-
-def income_tax(bruto):
-    # calculate bruto_tobe_taxed
-    bruto_tobe_taxed = bruto
-    employer_pens = EMPLOYER_PENSION * bruto
-    if employer_pens > MAX_EMPLOYER_PENSION:
-        bruto_tobe_taxed += employer_pens - MAX_EMPLOYER_PENSION
-    severence = EMPLOYER_SEVER * bruto
-    if severence > MAX_EMPLOYER_SEVER:
-        bruto_tobe_taxed += severence - MAX_EMPLOYER_HISHTALMUT
-    employer_hisht = bruto * EMPLOYER_HISHTALMUT
-    if employer_hisht > MAX_EMPLOYER_HISHTALMUT:
-        bruto_tobe_taxed += employer_hisht - MAX_EMPLOYER_HISHTALMUT
-
-    # calculate income tax without deductions
-    arr = TAX_BRACKET + [bruto_tobe_taxed]
-    arr.sort()
-    j = arr.index(bruto_tobe_taxed)
-    if j == 0:
-        res = bruto_tobe_taxed * TAX_RATES[0]
-    else:
-        res = TAX_BRACKET[0] * TAX_RATES[0]
-        for i in range(1, j + 1):
-            res += (arr[i] - arr[i - 1]) * TAX_RATES[i]
-
-    # calculate deductions
-    pension = bruto * PENSION_RATE
-    res -= (PENSION_TAX_DEDUCTION * min(MAX_PENSION, pension) + DISCOUNT)
-    return max(int(res), 0)
-
-
-# calculates fee for health or social insurance, flag true for health ins., flag false for social ins.
-def calc_ins_fee(bruto, flag):
-    if bruto < SIXTYPERC_AVG_INCOME:
-        return HEALTH_INS[0] * bruto if flag else SOCIAL_INS[0] * bruto
-    res = (HEALTH_INS[0] if flag else SOCIAL_INS[0]) * SIXTYPERC_AVG_INCOME
-    res += (HEALTH_INS[1] if flag else SOCIAL_INS[1]) * (bruto - SIXTYPERC_AVG_INCOME)
-    return int(res)
-
-
-def net_income(bruto):
-    health_ins_fee = calc_ins_fee(bruto, True)
-    social_ins_fee = calc_ins_fee(bruto, False)
-    inc_tax = income_tax(bruto)
-    print(inc_tax, health_ins_fee, social_ins_fee, bruto * (PENSION_RATE + HISHTALMUT_RATE))
-    return int(bruto - inc_tax - health_ins_fee - social_ins_fee - bruto *
-               (PENSION_RATE + HISHTALMUT_RATE))
-
-
-def savings(bruto):
-    return int(bruto * (PENSION_RATE + HISHTALMUT_RATE + EMPLOYER_HISHTALMUT + EMPLOYER_PENSION))
+MAX_NONTAXABLE_EMPLOYER_EDUCATION_FUND = EMPLOYER_EDUCATION_FUND_RATE * MAX_SALARY_WITHOUT_TAX_ON_EMPLOYER_EDUCATION_FUND
 
 
 def main():
-    bruto_income = float(input("enter (bruto) salary "))
-    net_income_result = net_income(bruto_income)
-    savings_result = savings(bruto_income)
-    print("net income is: " + str(int(net_income_result)) + "\nsavings are " +
-          str(int(savings_result)))
+    gross_salary = int(input("enter gross salary \n"))
+    net_income = _calculate_net_income(gross_salary)
+    savings = _calculate_savings(gross_salary)
+    return net_income, savings
+
+
+def _calculate_net_income(gross_salary: int) -> int:
+    gross_salary_with_additions = _calculate_gross_salary_with_additions(gross_salary)
+    income_tax = _calculate_income_tax(gross_salary_with_additions)
+    health_insurance_fee = _calculate_sum_of_brackets(
+        min(gross_salary_with_additions, MAX_SALARY_TO_CALCULATE_INSURANCE_FEE),
+        HEALTH_INSURANCE_BRACKETS)
+    social_insurance_fee = _calculate_sum_of_brackets(
+        min(gross_salary_with_additions, MAX_SALARY_TO_CALCULATE_INSURANCE_FEE),
+        SOCIAL_INSURANCE_BRACKETS)
+    employee_deductions = gross_salary * (EMPLOYEE_PENSION_RATE + EMPLOYEE_EDUCATION_FUND_RATE)
+    return int(gross_salary - income_tax - health_insurance_fee - social_insurance_fee -
+               employee_deductions)
+
+
+def _calculate_savings(gross_salary: int) -> int:
+    return int(gross_salary * (EMPLOYEE_PENSION_RATE + EMPLOYEE_EDUCATION_FUND_RATE +
+                               EMPLOYER_EDUCATION_FUND_RATE + EMPLOYER_PENSION))
+
+
+def _calculate_income_tax(gross_salary_with_additions: float) -> float:
+    income_tax_without_deductions = _calculate_sum_of_brackets(gross_salary_with_additions,
+                                                               INCOME_TAX_BRACKETS)
+    income_tax = income_tax_without_deductions - TAX_DEDUCTION_RATE_FROM_PENSION_DEPOSIT * min(
+        MAX_PENSION_DEPOSIT_TO_RECEIVE_TAX_DEDUCTION,
+        gross_salary_with_additions * EMPLOYEE_PENSION_RATE) - DISCOUNT
+    return max(income_tax, 0)
+
+
+def _calculate_gross_salary_with_additions(gross_salary: float) -> float:
+    employer_pension_to_be_taxed = max(
+        0.0, gross_salary * EMPLOYEE_PENSION_RATE - MAX_NONTAXABLE_EMPLOYER_PENSION)
+    severance_to_be_taxed = max(
+        0.0, gross_salary * EMPLOYER_SEVERANCE_RATE - MAX_NONTAXABLE_EMPLOYER_SEVERANCE)
+    employer_education_fund_to_be_taxed = max(
+        0.0, gross_salary * EMPLOYER_EDUCATION_FUND_RATE - MAX_NONTAXABLE_EMPLOYER_EDUCATION_FUND)
+    return gross_salary + employer_pension_to_be_taxed + severance_to_be_taxed + employer_education_fund_to_be_taxed
+
+
+def _calculate_sum_of_brackets(number: float, brackets: typing.Iterable[Bracket]) -> float:
+    relevant_brackets = [bracket for bracket in brackets if bracket.threshold < number]
+    relevant_brackets.append(Bracket(threshold=number, rate=0))  # this rate isn't used
+    result = 0
+    for index, bracket in enumerate(relevant_brackets):
+        if index == len(relevant_brackets) - 1:
+            continue
+        result += (relevant_brackets[index + 1].threshold - bracket.threshold) * bracket.rate
+    return result
 
 
 if __name__ == '__main__':
-    main()
+    print(main())
