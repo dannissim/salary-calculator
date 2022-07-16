@@ -59,7 +59,6 @@ to your target allocation - without selling any of your current assets.
 
 ### Built With
 
-[//]: # (TODO)
 * [Python 3.10](https://python.org/)
 * [Kol Zchut](https://www.kolzchut.org.il/he/%D7%A2%D7%9E%D7%95%D7%93_%D7%A8%D7%90%D7%A9%D7%99)
 

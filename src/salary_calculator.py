@@ -56,12 +56,12 @@ def main():
 def _calculate_net_income(gross_salary: int) -> int:
     gross_salary_with_additions = _calculate_gross_salary_with_additions(gross_salary)
     income_tax = _calculate_income_tax(gross_salary_with_additions)
-    health_insurance_fee = _calculate_sum_of_brackets(
-        min(gross_salary_with_additions, MAX_SALARY_TO_CALCULATE_INSURANCE_FEE),
-        HEALTH_INSURANCE_BRACKETS)
-    social_insurance_fee = _calculate_sum_of_brackets(
-        min(gross_salary_with_additions, MAX_SALARY_TO_CALCULATE_INSURANCE_FEE),
-        SOCIAL_INSURANCE_BRACKETS)
+    salary_to_calculate_insurance_fee = min(gross_salary_with_additions,
+                                            MAX_SALARY_TO_CALCULATE_INSURANCE_FEE)
+    health_insurance_fee = _calculate_sum_of_brackets(salary_to_calculate_insurance_fee,
+                                                      HEALTH_INSURANCE_BRACKETS)
+    social_insurance_fee = _calculate_sum_of_brackets(salary_to_calculate_insurance_fee,
+                                                      SOCIAL_INSURANCE_BRACKETS)
     employee_deductions = gross_salary * (EMPLOYEE_PENSION_RATE + EMPLOYEE_EDUCATION_FUND_RATE)
     return int(gross_salary - income_tax - health_insurance_fee - social_insurance_fee -
                employee_deductions)
@@ -95,9 +95,7 @@ def _calculate_sum_of_brackets(number: float, brackets: typing.Iterable[Bracket]
     relevant_brackets = [bracket for bracket in brackets if bracket.threshold < number]
     relevant_brackets.append(Bracket(threshold=number, rate=0))  # this rate isn't used
     result = 0
-    for index, bracket in enumerate(relevant_brackets):
-        if index == len(relevant_brackets) - 1:
-            continue
+    for index, bracket in enumerate(relevant_brackets[:-1]):
         result += (relevant_brackets[index + 1].threshold - bracket.threshold) * bracket.rate
     return result
 
