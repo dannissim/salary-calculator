@@ -43,6 +43,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 [//]: # (TODO)
+app that calculates your monthly salary and your savings after taking off by-law expenses: Pension savings,
+"Keren hishtalmut", Health insurance, income tax, social insurance.
 Suppose you have a self-managed portfolio, and each month you add a portion of your income to your portfolio.
 Suppose as well that you have a target asset allocation. For example:  
 | Asset | Target Allocation |
@@ -80,7 +82,7 @@ to your target allocation - without selling any of your current assets.
 5. Run `python main.py`
 6. Then the result will appear in a newly created file `result.json`. 
 
-### What does it do?
+### Results
 
 [//]: # (TODO)
 This app calculates the difference between your portfolio and the portfolio which has the same
@@ -88,31 +90,11 @@ market value but with the target allocation, then recommends you to buy the asse
 that brings your portfolio as close as possible to the target portfolio allocation.  
 You're welcome to take a look at the [`input.json`](input.json) currently in the repository.  
 Here's an example for the content of the `result.json`:
-```json
-{
-  "current_allocation": {
-    "schd": 80.72,
-    "vtv": 45.8,
-    "upro": 28.14,
-    "_cash": -54.66
-  },
-  "new_allocation": {
-    "schd": 74.63,
-    "vtv": 48.93,
-    "upro": 25.55,
-    "_cash": -48.76
-  },
-  "amount_to_purchase": {
-    "_cash": 95,
-    "vtv": 6,
-    "schd": 2,
-    "upro": 0
-  }
-}
-```
-In the above example we can see that the app recommends to purchase 6 stocks of VTV, 2 of SCHD and  
-the $95 that are left from the deposited amount to leave as cash.  
-We can also see that the new allocation is much closer to the targeted allocation than we were beforehand.
+| Asset | Target Allocation |
+|-------|-------------------|
+| VTI   | 64%               |
+| VXUS  | 16%               |
+| BND   | 20%               |  
 
 ### Relevant Documentation
 * דמי ביטוח לאומי
