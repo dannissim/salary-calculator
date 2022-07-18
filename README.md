@@ -90,8 +90,8 @@ market value but with the target allocation, then recommends you to buy the asse
 that brings your portfolio as close as possible to the target portfolio allocation.  
 You're welcome to take a look at the [`input.json`](input.json) currently in the repository.  
 Here's an example for the content of the `result.json`:
-<table class="table table-bordered table-hover table-condensed">
-<thead><tr><th title="Field #1">Gross Salary</th>
+<table class="table table-bordered table-hover table-condensed" style="max-height: 50rem">
+<thead style="position: sticky; top: 0"><tr><th title="Field #1">Gross Salary</th>
 <th title="Field #2">Taxable Income</th>
 <th title="Field #3">Income Tax</th>
 <th title="Field #4">Health Insurance</th>
@@ -870,7 +870,8 @@ Here's an example for the content of the `result.json`:
 <td align="right">23500</td>
 <td align="right">39664</td>
 </tr>
-</tbody></table>
+</tbody></table>  
+
 ### Relevant Documentation
 * דמי ביטוח לאומי
   * [כל זכות](https://www.kolzchut.org.il/he/%D7%93%D7%9E%D7%99_%D7%91%D7%99%D7%98%D7%95%D7%97_%D7%9C%D7%90%D7%95%D7%9E%D7%99_%D7%9C%D7%A2%D7%95%D7%91%D7%93_%D7%A9%D7%9B%D7%99%D7%A8)
