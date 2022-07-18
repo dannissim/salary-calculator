@@ -90,60 +90,787 @@ market value but with the target allocation, then recommends you to buy the asse
 that brings your portfolio as close as possible to the target portfolio allocation.  
 You're welcome to take a look at the [`input.json`](input.json) currently in the repository.  
 Here's an example for the content of the `result.json`:
-|Gross Salary|Taxable Income|Income Tax|Health Insurance|Social Insurance|Employee Pension|Employer Pension|Employee Education Fund|Employer Education Fund|Employer Severance|Overall Savings|Net Income|Overall Income|
-|------------|--------------|----------|----------------|----------------|----------------|----------------|-----------------------|-----------------------|------------------|---------------|----------|--------------|
-|0           |0             |0         |0               |0               |0               |0               |0                      |0                      |0                 |0              |0         |0             |
-|1000        |1000          |0         |31              |4               |70              |70              |25                     |75                     |83                |323            |870       |1193          |
-|2000        |2000          |0         |62              |8               |140             |140             |50                     |150                    |166               |646            |1740      |2386          |
-|3000        |3000          |0         |93              |12              |210             |210             |75                     |225                    |249               |969            |2610      |3579          |
-|4000        |4000          |0         |124             |16              |280             |280             |100                    |300                    |333               |1293           |3480      |4773          |
-|5000        |5000          |0         |155             |20              |350             |350             |125                    |375                    |416               |1616           |4350      |5966          |
-|6000        |6000          |0         |186             |24              |420             |420             |150                    |450                    |499               |1939           |5220      |7159          |
-|7000        |7000          |48        |229             |72              |490             |490             |175                    |525                    |583               |2263           |5984      |8247          |
-|8000        |8000          |164       |279             |142             |560             |560             |200                    |600                    |666               |2586           |6653      |9239          |
-|9000        |9000          |282       |329             |212             |630             |630             |225                    |675                    |749               |2909           |7320      |10229         |
-|10000       |10000         |467       |379             |282             |700             |700             |250                    |750                    |833               |3232           |7920      |11152         |
-|11000       |11000         |667       |429             |352             |770             |770             |275                    |825                    |916               |3556           |8505      |12061         |
-|12000       |12000         |867       |479             |422             |840             |840             |300                    |900                    |999               |3879           |9090      |12969         |
-|13000       |13000         |1067      |529             |492             |910             |910             |325                    |975                    |1082              |4202           |9675      |13877         |
-|14000       |14000         |1267      |579             |562             |980             |980             |350                    |1050                   |1166              |4526           |10260     |14786         |
-|15000       |15000         |1485      |629             |632             |1050            |1050            |375                    |1125                   |1249              |4849           |10827     |15676         |
-|16000       |16021         |1801      |680             |703             |1120            |1120            |400                    |1200                   |1332              |5172           |11293     |16465         |
-|17000       |17096         |2135      |734             |778             |1190            |1190            |425                    |1275                   |1416              |5496           |11736     |17232         |
-|18000       |18171         |2468      |788             |854             |1260            |1260            |450                    |1350                   |1499              |5819           |12179     |17998         |
-|19000       |19246         |2801      |842             |929             |1330            |1330            |475                    |1425                   |1582              |6142           |12621     |18763         |
-|20000       |20321         |3134      |895             |1004            |1400            |1400            |500                    |1500                   |1666              |6465           |13064     |19529         |
-|21000       |21396         |3499      |949             |1079            |1470            |1470            |525                    |1575                   |1749              |6789           |13476     |20265         |
-|22000       |22471         |3875      |1003            |1155            |1540            |1540            |550                    |1650                   |1832              |7112           |13876     |20988         |
-|23000       |23546         |4251      |1057            |1230            |1610            |1610            |575                    |1725                   |1915              |7435           |14275     |21710         |
-|24000       |24621         |4627      |1110            |1305            |1680            |1680            |600                    |1800                   |1999              |7759           |14675     |22434         |
-|25000       |25696         |5004      |1164            |1380            |1750            |1750            |625                    |1875                   |2082              |8082           |15075     |23157         |
-|26000       |26771         |5380      |1218            |1456            |1820            |1820            |650                    |1950                   |2165              |8405           |15475     |23880         |
-|27000       |27846         |5756      |1272            |1531            |1890            |1890            |675                    |2025                   |2249              |8729           |15874     |24603         |
-|28000       |28921         |6132      |1325            |1606            |1960            |1960            |700                    |2100                   |2332              |9052           |16274     |25326         |
-|29000       |30048         |6527      |1382            |1685            |2030            |2030            |725                    |2175                   |2415              |9375           |16649     |26024         |
-|30000       |31193         |6928      |1439            |1765            |2100            |2100            |750                    |2250                   |2499              |9699           |17016     |26715         |
-|31000       |32338         |7328      |1496            |1845            |2170            |2170            |775                    |2325                   |2582              |10022          |17383     |27405         |
-|32000       |33483         |7729      |1553            |1925            |2240            |2240            |800                    |2400                   |2665              |10345          |17750     |28095         |
-|33000       |34628         |8130      |1611            |2006            |2310            |2310            |825                    |2475                   |2748              |10668          |18117     |28785         |
-|34000       |35773         |8531      |1668            |2086            |2380            |2380            |850                    |2550                   |2832              |10992          |18484     |29476         |
-|35000       |36926         |8934      |1726            |2166            |2450            |2450            |875                    |2625                   |2915              |11315          |18847     |30162         |
-|36000       |38154         |9364      |1787            |2252            |2520            |2520            |900                    |2700                   |2998              |11638          |19175     |30813         |
-|37000       |39382         |9794      |1848            |2338            |2590            |2590            |925                    |2775                   |3082              |11962          |19502     |31464         |
-|38000       |40611         |10224     |1910            |2424            |2660            |2660            |950                    |2850                   |3165              |12285          |19830     |32115         |
-|39000       |41839         |10654     |1971            |2510            |2730            |2730            |975                    |2925                   |3248              |12608          |20158     |32766         |
-|40000       |43067         |11102     |2033            |2596            |2800            |2800            |1000                   |3000                   |3332              |12931          |20467     |33398         |
-|41000       |44295         |11680     |2094            |2682            |2870            |2870            |1025                   |3075                   |3415              |13255          |20647     |33902         |
-|42000       |45524         |12257     |2133            |2737            |2940            |2940            |1050                   |3150                   |3498              |13578          |20881     |34459         |
-|43000       |46752         |12834     |2133            |2737            |3010            |3010            |1075                   |3225                   |3581              |13901          |21209     |35110         |
-|44000       |47980         |13411     |2133            |2737            |3080            |3080            |1100                   |3300                   |3665              |14225          |21537     |35762         |
-|45000       |49209         |13989     |2133            |2737            |3150            |3150            |1125                   |3375                   |3748              |14548          |21864     |36412         |
-|46000       |50437         |14566     |2133            |2737            |3220            |3220            |1150                   |3450                   |3831              |14871          |22192     |37063         |
-|47000       |51665         |15143     |2133            |2737            |3290            |3290            |1175                   |3525                   |3915              |15195          |22520     |37715         |
-|48000       |52894         |15721     |2133            |2737            |3360            |3360            |1200                   |3600                   |3998              |15518          |22847     |38365         |
-|49000       |54122         |16298     |2133            |2737            |3430            |3430            |1225                   |3675                   |4081              |15841          |23175     |39016         |
-|50000       |55350         |16878     |2133            |2737            |3500            |3500            |1250                   |3750                   |4165              |16164          |23500     |39664         |
-
+<table class="table table-bordered table-hover table-condensed">
+<thead><tr><th title="Field #1">Gross Salary</th>
+<th title="Field #2">Taxable Income</th>
+<th title="Field #3">Income Tax</th>
+<th title="Field #4">Health Insurance</th>
+<th title="Field #5">Social Insurance</th>
+<th title="Field #6">Employee Pension</th>
+<th title="Field #7">Employer Pension</th>
+<th title="Field #8">Employee Education Fund</th>
+<th title="Field #9">Employer Education Fund</th>
+<th title="Field #10">Employer Severance</th>
+<th title="Field #11">Overall Savings</th>
+<th title="Field #12">Net Income</th>
+<th title="Field #13">Overall Income</th>
+</tr></thead>
+<tbody><tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="right">1000</td>
+<td align="right">1000</td>
+<td align="right">0</td>
+<td align="right">31</td>
+<td align="right">4</td>
+<td align="right">70</td>
+<td align="right">70</td>
+<td align="right">25</td>
+<td align="right">75</td>
+<td align="right">83</td>
+<td align="right">323</td>
+<td align="right">870</td>
+<td align="right">1193</td>
+</tr>
+<tr>
+<td align="right">2000</td>
+<td align="right">2000</td>
+<td align="right">0</td>
+<td align="right">62</td>
+<td align="right">8</td>
+<td align="right">140</td>
+<td align="right">140</td>
+<td align="right">50</td>
+<td align="right">150</td>
+<td align="right">166</td>
+<td align="right">646</td>
+<td align="right">1740</td>
+<td align="right">2386</td>
+</tr>
+<tr>
+<td align="right">3000</td>
+<td align="right">3000</td>
+<td align="right">0</td>
+<td align="right">93</td>
+<td align="right">12</td>
+<td align="right">210</td>
+<td align="right">210</td>
+<td align="right">75</td>
+<td align="right">225</td>
+<td align="right">249</td>
+<td align="right">969</td>
+<td align="right">2610</td>
+<td align="right">3579</td>
+</tr>
+<tr>
+<td align="right">4000</td>
+<td align="right">4000</td>
+<td align="right">0</td>
+<td align="right">124</td>
+<td align="right">16</td>
+<td align="right">280</td>
+<td align="right">280</td>
+<td align="right">100</td>
+<td align="right">300</td>
+<td align="right">333</td>
+<td align="right">1293</td>
+<td align="right">3480</td>
+<td align="right">4773</td>
+</tr>
+<tr>
+<td align="right">5000</td>
+<td align="right">5000</td>
+<td align="right">0</td>
+<td align="right">155</td>
+<td align="right">20</td>
+<td align="right">350</td>
+<td align="right">350</td>
+<td align="right">125</td>
+<td align="right">375</td>
+<td align="right">416</td>
+<td align="right">1616</td>
+<td align="right">4350</td>
+<td align="right">5966</td>
+</tr>
+<tr>
+<td align="right">6000</td>
+<td align="right">6000</td>
+<td align="right">0</td>
+<td align="right">186</td>
+<td align="right">24</td>
+<td align="right">420</td>
+<td align="right">420</td>
+<td align="right">150</td>
+<td align="right">450</td>
+<td align="right">499</td>
+<td align="right">1939</td>
+<td align="right">5220</td>
+<td align="right">7159</td>
+</tr>
+<tr>
+<td align="right">7000</td>
+<td align="right">7000</td>
+<td align="right">48</td>
+<td align="right">229</td>
+<td align="right">72</td>
+<td align="right">490</td>
+<td align="right">490</td>
+<td align="right">175</td>
+<td align="right">525</td>
+<td align="right">583</td>
+<td align="right">2263</td>
+<td align="right">5984</td>
+<td align="right">8247</td>
+</tr>
+<tr>
+<td align="right">8000</td>
+<td align="right">8000</td>
+<td align="right">164</td>
+<td align="right">279</td>
+<td align="right">142</td>
+<td align="right">560</td>
+<td align="right">560</td>
+<td align="right">200</td>
+<td align="right">600</td>
+<td align="right">666</td>
+<td align="right">2586</td>
+<td align="right">6653</td>
+<td align="right">9239</td>
+</tr>
+<tr>
+<td align="right">9000</td>
+<td align="right">9000</td>
+<td align="right">282</td>
+<td align="right">329</td>
+<td align="right">212</td>
+<td align="right">630</td>
+<td align="right">630</td>
+<td align="right">225</td>
+<td align="right">675</td>
+<td align="right">749</td>
+<td align="right">2909</td>
+<td align="right">7320</td>
+<td align="right">10229</td>
+</tr>
+<tr>
+<td align="right">10000</td>
+<td align="right">10000</td>
+<td align="right">467</td>
+<td align="right">379</td>
+<td align="right">282</td>
+<td align="right">700</td>
+<td align="right">700</td>
+<td align="right">250</td>
+<td align="right">750</td>
+<td align="right">833</td>
+<td align="right">3232</td>
+<td align="right">7920</td>
+<td align="right">11152</td>
+</tr>
+<tr>
+<td align="right">11000</td>
+<td align="right">11000</td>
+<td align="right">667</td>
+<td align="right">429</td>
+<td align="right">352</td>
+<td align="right">770</td>
+<td align="right">770</td>
+<td align="right">275</td>
+<td align="right">825</td>
+<td align="right">916</td>
+<td align="right">3556</td>
+<td align="right">8505</td>
+<td align="right">12061</td>
+</tr>
+<tr>
+<td align="right">12000</td>
+<td align="right">12000</td>
+<td align="right">867</td>
+<td align="right">479</td>
+<td align="right">422</td>
+<td align="right">840</td>
+<td align="right">840</td>
+<td align="right">300</td>
+<td align="right">900</td>
+<td align="right">999</td>
+<td align="right">3879</td>
+<td align="right">9090</td>
+<td align="right">12969</td>
+</tr>
+<tr>
+<td align="right">13000</td>
+<td align="right">13000</td>
+<td align="right">1067</td>
+<td align="right">529</td>
+<td align="right">492</td>
+<td align="right">910</td>
+<td align="right">910</td>
+<td align="right">325</td>
+<td align="right">975</td>
+<td align="right">1082</td>
+<td align="right">4202</td>
+<td align="right">9675</td>
+<td align="right">13877</td>
+</tr>
+<tr>
+<td align="right">14000</td>
+<td align="right">14000</td>
+<td align="right">1267</td>
+<td align="right">579</td>
+<td align="right">562</td>
+<td align="right">980</td>
+<td align="right">980</td>
+<td align="right">350</td>
+<td align="right">1050</td>
+<td align="right">1166</td>
+<td align="right">4526</td>
+<td align="right">10260</td>
+<td align="right">14786</td>
+</tr>
+<tr>
+<td align="right">15000</td>
+<td align="right">15000</td>
+<td align="right">1485</td>
+<td align="right">629</td>
+<td align="right">632</td>
+<td align="right">1050</td>
+<td align="right">1050</td>
+<td align="right">375</td>
+<td align="right">1125</td>
+<td align="right">1249</td>
+<td align="right">4849</td>
+<td align="right">10827</td>
+<td align="right">15676</td>
+</tr>
+<tr>
+<td align="right">16000</td>
+<td align="right">16021</td>
+<td align="right">1801</td>
+<td align="right">680</td>
+<td align="right">703</td>
+<td align="right">1120</td>
+<td align="right">1120</td>
+<td align="right">400</td>
+<td align="right">1200</td>
+<td align="right">1332</td>
+<td align="right">5172</td>
+<td align="right">11293</td>
+<td align="right">16465</td>
+</tr>
+<tr>
+<td align="right">17000</td>
+<td align="right">17096</td>
+<td align="right">2135</td>
+<td align="right">734</td>
+<td align="right">778</td>
+<td align="right">1190</td>
+<td align="right">1190</td>
+<td align="right">425</td>
+<td align="right">1275</td>
+<td align="right">1416</td>
+<td align="right">5496</td>
+<td align="right">11736</td>
+<td align="right">17232</td>
+</tr>
+<tr>
+<td align="right">18000</td>
+<td align="right">18171</td>
+<td align="right">2468</td>
+<td align="right">788</td>
+<td align="right">854</td>
+<td align="right">1260</td>
+<td align="right">1260</td>
+<td align="right">450</td>
+<td align="right">1350</td>
+<td align="right">1499</td>
+<td align="right">5819</td>
+<td align="right">12179</td>
+<td align="right">17998</td>
+</tr>
+<tr>
+<td align="right">19000</td>
+<td align="right">19246</td>
+<td align="right">2801</td>
+<td align="right">842</td>
+<td align="right">929</td>
+<td align="right">1330</td>
+<td align="right">1330</td>
+<td align="right">475</td>
+<td align="right">1425</td>
+<td align="right">1582</td>
+<td align="right">6142</td>
+<td align="right">12621</td>
+<td align="right">18763</td>
+</tr>
+<tr>
+<td align="right">20000</td>
+<td align="right">20321</td>
+<td align="right">3134</td>
+<td align="right">895</td>
+<td align="right">1004</td>
+<td align="right">1400</td>
+<td align="right">1400</td>
+<td align="right">500</td>
+<td align="right">1500</td>
+<td align="right">1666</td>
+<td align="right">6465</td>
+<td align="right">13064</td>
+<td align="right">19529</td>
+</tr>
+<tr>
+<td align="right">21000</td>
+<td align="right">21396</td>
+<td align="right">3499</td>
+<td align="right">949</td>
+<td align="right">1079</td>
+<td align="right">1470</td>
+<td align="right">1470</td>
+<td align="right">525</td>
+<td align="right">1575</td>
+<td align="right">1749</td>
+<td align="right">6789</td>
+<td align="right">13476</td>
+<td align="right">20265</td>
+</tr>
+<tr>
+<td align="right">22000</td>
+<td align="right">22471</td>
+<td align="right">3875</td>
+<td align="right">1003</td>
+<td align="right">1155</td>
+<td align="right">1540</td>
+<td align="right">1540</td>
+<td align="right">550</td>
+<td align="right">1650</td>
+<td align="right">1832</td>
+<td align="right">7112</td>
+<td align="right">13876</td>
+<td align="right">20988</td>
+</tr>
+<tr>
+<td align="right">23000</td>
+<td align="right">23546</td>
+<td align="right">4251</td>
+<td align="right">1057</td>
+<td align="right">1230</td>
+<td align="right">1610</td>
+<td align="right">1610</td>
+<td align="right">575</td>
+<td align="right">1725</td>
+<td align="right">1915</td>
+<td align="right">7435</td>
+<td align="right">14275</td>
+<td align="right">21710</td>
+</tr>
+<tr>
+<td align="right">24000</td>
+<td align="right">24621</td>
+<td align="right">4627</td>
+<td align="right">1110</td>
+<td align="right">1305</td>
+<td align="right">1680</td>
+<td align="right">1680</td>
+<td align="right">600</td>
+<td align="right">1800</td>
+<td align="right">1999</td>
+<td align="right">7759</td>
+<td align="right">14675</td>
+<td align="right">22434</td>
+</tr>
+<tr>
+<td align="right">25000</td>
+<td align="right">25696</td>
+<td align="right">5004</td>
+<td align="right">1164</td>
+<td align="right">1380</td>
+<td align="right">1750</td>
+<td align="right">1750</td>
+<td align="right">625</td>
+<td align="right">1875</td>
+<td align="right">2082</td>
+<td align="right">8082</td>
+<td align="right">15075</td>
+<td align="right">23157</td>
+</tr>
+<tr>
+<td align="right">26000</td>
+<td align="right">26771</td>
+<td align="right">5380</td>
+<td align="right">1218</td>
+<td align="right">1456</td>
+<td align="right">1820</td>
+<td align="right">1820</td>
+<td align="right">650</td>
+<td align="right">1950</td>
+<td align="right">2165</td>
+<td align="right">8405</td>
+<td align="right">15475</td>
+<td align="right">23880</td>
+</tr>
+<tr>
+<td align="right">27000</td>
+<td align="right">27846</td>
+<td align="right">5756</td>
+<td align="right">1272</td>
+<td align="right">1531</td>
+<td align="right">1890</td>
+<td align="right">1890</td>
+<td align="right">675</td>
+<td align="right">2025</td>
+<td align="right">2249</td>
+<td align="right">8729</td>
+<td align="right">15874</td>
+<td align="right">24603</td>
+</tr>
+<tr>
+<td align="right">28000</td>
+<td align="right">28921</td>
+<td align="right">6132</td>
+<td align="right">1325</td>
+<td align="right">1606</td>
+<td align="right">1960</td>
+<td align="right">1960</td>
+<td align="right">700</td>
+<td align="right">2100</td>
+<td align="right">2332</td>
+<td align="right">9052</td>
+<td align="right">16274</td>
+<td align="right">25326</td>
+</tr>
+<tr>
+<td align="right">29000</td>
+<td align="right">30048</td>
+<td align="right">6527</td>
+<td align="right">1382</td>
+<td align="right">1685</td>
+<td align="right">2030</td>
+<td align="right">2030</td>
+<td align="right">725</td>
+<td align="right">2175</td>
+<td align="right">2415</td>
+<td align="right">9375</td>
+<td align="right">16649</td>
+<td align="right">26024</td>
+</tr>
+<tr>
+<td align="right">30000</td>
+<td align="right">31193</td>
+<td align="right">6928</td>
+<td align="right">1439</td>
+<td align="right">1765</td>
+<td align="right">2100</td>
+<td align="right">2100</td>
+<td align="right">750</td>
+<td align="right">2250</td>
+<td align="right">2499</td>
+<td align="right">9699</td>
+<td align="right">17016</td>
+<td align="right">26715</td>
+</tr>
+<tr>
+<td align="right">31000</td>
+<td align="right">32338</td>
+<td align="right">7328</td>
+<td align="right">1496</td>
+<td align="right">1845</td>
+<td align="right">2170</td>
+<td align="right">2170</td>
+<td align="right">775</td>
+<td align="right">2325</td>
+<td align="right">2582</td>
+<td align="right">10022</td>
+<td align="right">17383</td>
+<td align="right">27405</td>
+</tr>
+<tr>
+<td align="right">32000</td>
+<td align="right">33483</td>
+<td align="right">7729</td>
+<td align="right">1553</td>
+<td align="right">1925</td>
+<td align="right">2240</td>
+<td align="right">2240</td>
+<td align="right">800</td>
+<td align="right">2400</td>
+<td align="right">2665</td>
+<td align="right">10345</td>
+<td align="right">17750</td>
+<td align="right">28095</td>
+</tr>
+<tr>
+<td align="right">33000</td>
+<td align="right">34628</td>
+<td align="right">8130</td>
+<td align="right">1611</td>
+<td align="right">2006</td>
+<td align="right">2310</td>
+<td align="right">2310</td>
+<td align="right">825</td>
+<td align="right">2475</td>
+<td align="right">2748</td>
+<td align="right">10668</td>
+<td align="right">18117</td>
+<td align="right">28785</td>
+</tr>
+<tr>
+<td align="right">34000</td>
+<td align="right">35773</td>
+<td align="right">8531</td>
+<td align="right">1668</td>
+<td align="right">2086</td>
+<td align="right">2380</td>
+<td align="right">2380</td>
+<td align="right">850</td>
+<td align="right">2550</td>
+<td align="right">2832</td>
+<td align="right">10992</td>
+<td align="right">18484</td>
+<td align="right">29476</td>
+</tr>
+<tr>
+<td align="right">35000</td>
+<td align="right">36926</td>
+<td align="right">8934</td>
+<td align="right">1726</td>
+<td align="right">2166</td>
+<td align="right">2450</td>
+<td align="right">2450</td>
+<td align="right">875</td>
+<td align="right">2625</td>
+<td align="right">2915</td>
+<td align="right">11315</td>
+<td align="right">18847</td>
+<td align="right">30162</td>
+</tr>
+<tr>
+<td align="right">36000</td>
+<td align="right">38154</td>
+<td align="right">9364</td>
+<td align="right">1787</td>
+<td align="right">2252</td>
+<td align="right">2520</td>
+<td align="right">2520</td>
+<td align="right">900</td>
+<td align="right">2700</td>
+<td align="right">2998</td>
+<td align="right">11638</td>
+<td align="right">19175</td>
+<td align="right">30813</td>
+</tr>
+<tr>
+<td align="right">37000</td>
+<td align="right">39382</td>
+<td align="right">9794</td>
+<td align="right">1848</td>
+<td align="right">2338</td>
+<td align="right">2590</td>
+<td align="right">2590</td>
+<td align="right">925</td>
+<td align="right">2775</td>
+<td align="right">3082</td>
+<td align="right">11962</td>
+<td align="right">19502</td>
+<td align="right">31464</td>
+</tr>
+<tr>
+<td align="right">38000</td>
+<td align="right">40611</td>
+<td align="right">10224</td>
+<td align="right">1910</td>
+<td align="right">2424</td>
+<td align="right">2660</td>
+<td align="right">2660</td>
+<td align="right">950</td>
+<td align="right">2850</td>
+<td align="right">3165</td>
+<td align="right">12285</td>
+<td align="right">19830</td>
+<td align="right">32115</td>
+</tr>
+<tr>
+<td align="right">39000</td>
+<td align="right">41839</td>
+<td align="right">10654</td>
+<td align="right">1971</td>
+<td align="right">2510</td>
+<td align="right">2730</td>
+<td align="right">2730</td>
+<td align="right">975</td>
+<td align="right">2925</td>
+<td align="right">3248</td>
+<td align="right">12608</td>
+<td align="right">20158</td>
+<td align="right">32766</td>
+</tr>
+<tr>
+<td align="right">40000</td>
+<td align="right">43067</td>
+<td align="right">11102</td>
+<td align="right">2033</td>
+<td align="right">2596</td>
+<td align="right">2800</td>
+<td align="right">2800</td>
+<td align="right">1000</td>
+<td align="right">3000</td>
+<td align="right">3332</td>
+<td align="right">12931</td>
+<td align="right">20467</td>
+<td align="right">33398</td>
+</tr>
+<tr>
+<td align="right">41000</td>
+<td align="right">44295</td>
+<td align="right">11680</td>
+<td align="right">2094</td>
+<td align="right">2682</td>
+<td align="right">2870</td>
+<td align="right">2870</td>
+<td align="right">1025</td>
+<td align="right">3075</td>
+<td align="right">3415</td>
+<td align="right">13255</td>
+<td align="right">20647</td>
+<td align="right">33902</td>
+</tr>
+<tr>
+<td align="right">42000</td>
+<td align="right">45524</td>
+<td align="right">12257</td>
+<td align="right">2133</td>
+<td align="right">2737</td>
+<td align="right">2940</td>
+<td align="right">2940</td>
+<td align="right">1050</td>
+<td align="right">3150</td>
+<td align="right">3498</td>
+<td align="right">13578</td>
+<td align="right">20881</td>
+<td align="right">34459</td>
+</tr>
+<tr>
+<td align="right">43000</td>
+<td align="right">46752</td>
+<td align="right">12834</td>
+<td align="right">2133</td>
+<td align="right">2737</td>
+<td align="right">3010</td>
+<td align="right">3010</td>
+<td align="right">1075</td>
+<td align="right">3225</td>
+<td align="right">3581</td>
+<td align="right">13901</td>
+<td align="right">21209</td>
+<td align="right">35110</td>
+</tr>
+<tr>
+<td align="right">44000</td>
+<td align="right">47980</td>
+<td align="right">13411</td>
+<td align="right">2133</td>
+<td align="right">2737</td>
+<td align="right">3080</td>
+<td align="right">3080</td>
+<td align="right">1100</td>
+<td align="right">3300</td>
+<td align="right">3665</td>
+<td align="right">14225</td>
+<td align="right">21537</td>
+<td align="right">35762</td>
+</tr>
+<tr>
+<td align="right">45000</td>
+<td align="right">49209</td>
+<td align="right">13989</td>
+<td align="right">2133</td>
+<td align="right">2737</td>
+<td align="right">3150</td>
+<td align="right">3150</td>
+<td align="right">1125</td>
+<td align="right">3375</td>
+<td align="right">3748</td>
+<td align="right">14548</td>
+<td align="right">21864</td>
+<td align="right">36412</td>
+</tr>
+<tr>
+<td align="right">46000</td>
+<td align="right">50437</td>
+<td align="right">14566</td>
+<td align="right">2133</td>
+<td align="right">2737</td>
+<td align="right">3220</td>
+<td align="right">3220</td>
+<td align="right">1150</td>
+<td align="right">3450</td>
+<td align="right">3831</td>
+<td align="right">14871</td>
+<td align="right">22192</td>
+<td align="right">37063</td>
+</tr>
+<tr>
+<td align="right">47000</td>
+<td align="right">51665</td>
+<td align="right">15143</td>
+<td align="right">2133</td>
+<td align="right">2737</td>
+<td align="right">3290</td>
+<td align="right">3290</td>
+<td align="right">1175</td>
+<td align="right">3525</td>
+<td align="right">3915</td>
+<td align="right">15195</td>
+<td align="right">22520</td>
+<td align="right">37715</td>
+</tr>
+<tr>
+<td align="right">48000</td>
+<td align="right">52894</td>
+<td align="right">15721</td>
+<td align="right">2133</td>
+<td align="right">2737</td>
+<td align="right">3360</td>
+<td align="right">3360</td>
+<td align="right">1200</td>
+<td align="right">3600</td>
+<td align="right">3998</td>
+<td align="right">15518</td>
+<td align="right">22847</td>
+<td align="right">38365</td>
+</tr>
+<tr>
+<td align="right">49000</td>
+<td align="right">54122</td>
+<td align="right">16298</td>
+<td align="right">2133</td>
+<td align="right">2737</td>
+<td align="right">3430</td>
+<td align="right">3430</td>
+<td align="right">1225</td>
+<td align="right">3675</td>
+<td align="right">4081</td>
+<td align="right">15841</td>
+<td align="right">23175</td>
+<td align="right">39016</td>
+</tr>
+<tr>
+<td align="right">50000</td>
+<td align="right">55350</td>
+<td align="right">16878</td>
+<td align="right">2133</td>
+<td align="right">2737</td>
+<td align="right">3500</td>
+<td align="right">3500</td>
+<td align="right">1250</td>
+<td align="right">3750</td>
+<td align="right">4165</td>
+<td align="right">16164</td>
+<td align="right">23500</td>
+<td align="right">39664</td>
+</tr>
+</tbody></table>
 ### Relevant Documentation
 * דמי ביטוח לאומי
   * [כל זכות](https://www.kolzchut.org.il/he/%D7%93%D7%9E%D7%99_%D7%91%D7%99%D7%98%D7%95%D7%97_%D7%9C%D7%90%D7%95%D7%9E%D7%99_%D7%9C%D7%A2%D7%95%D7%91%D7%93_%D7%A9%D7%9B%D7%99%D7%A8)
