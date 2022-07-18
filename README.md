@@ -89,7 +89,8 @@ This app calculates the difference between your portfolio and the portfolio whic
 market value but with the target allocation, then recommends you to buy the assets in such a way
 that brings your portfolio as close as possible to the target portfolio allocation.  
 You're welcome to take a look at the [`input.json`](input.json) currently in the repository.  
-Here's an example for the content of the `result.json`:
+Here's an example for the content of the `result.json`:  
+
 <table class="table table-bordered table-hover table-condensed" style="max-height: 50rem;">
 <thead style="position: sticky; top: 0;"><tr><th title="Field #1">Gross Salary</th>
 <th title="Field #2">Taxable Income</th>
