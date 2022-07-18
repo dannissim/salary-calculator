@@ -93,7 +93,6 @@ Here's an example for the content of the `result.json`:
 
 |Gross Salary|Taxable Income|Income Tax|Health Insurance|Social Insurance|Employee Pension|Employer Pension|Employee Education Fund|Employer Education Fund|Employer Severance|Overall Savings|Net Income|Overall Income|
 |------------|--------------|----------|----------------|----------------|----------------|----------------|-----------------------|-----------------------|------------------|---------------|----------|--------------|
-|0           |0             |0         |0               |0               |0               |0               |0                      |0                      |0                 |0              |0         |0             |
 |1000        |1000          |0         |31              |4               |70              |70              |25                     |75                     |83                |323            |870       |1193          |
 |2000        |2000          |0         |62              |8               |140             |140             |50                     |150                    |166               |646            |1740      |2386          |
 |3000        |3000          |0         |93              |12              |210             |210             |75                     |225                    |249               |969            |2610      |3579          |
@@ -103,8 +102,8 @@ Here's an example for the content of the `result.json`:
 |7000        |7000          |48        |229             |72              |490             |490             |175                    |525                    |583               |2263           |5984      |8247          |
 |8000        |8000          |164       |279             |142             |560             |560             |200                    |600                    |666               |2586           |6653      |9239          |
 |9000        |9000          |282       |329             |212             |630             |630             |225                    |675                    |749               |2909           |7320      |10229         |
-|Gross Salary|Taxable Income|Income Tax|Health Insurance|Social Insurance|Employee Pension|Employer Pension|Employee Education Fund|Employer Education Fund|Employer Severance|Overall Savings|Net Income|Overall Income|
 |10000       |10000         |467       |379             |282             |700             |700             |250                    |750                    |833               |3232           |7920      |11152         |
+|Gross Salary|Taxable Income|Income Tax|Health Insurance|Social Insurance|Employee Pension|Employer Pension|Employee Education Fund|Employer Education Fund|Employer Severance|Overall Savings|Net Income|Overall Income|
 |11000       |11000         |667       |429             |352             |770             |770             |275                    |825                    |916               |3556           |8505      |12061         |
 |12000       |12000         |867       |479             |422             |840             |840             |300                    |900                    |999               |3879           |9090      |12969         |
 |13000       |13000         |1067      |529             |492             |910             |910             |325                    |975                    |1082              |4202           |9675      |13877         |
@@ -114,8 +113,8 @@ Here's an example for the content of the `result.json`:
 |17000       |17096         |2135      |734             |778             |1190            |1190            |425                    |1275                   |1416              |5496           |11736     |17232         |
 |18000       |18171         |2468      |788             |854             |1260            |1260            |450                    |1350                   |1499              |5819           |12179     |17998         |
 |19000       |19246         |2801      |842             |929             |1330            |1330            |475                    |1425                   |1582              |6142           |12621     |18763         |
-|Gross Salary|Taxable Income|Income Tax|Health Insurance|Social Insurance|Employee Pension|Employer Pension|Employee Education Fund|Employer Education Fund|Employer Severance|Overall Savings|Net Income|Overall Income|
 |20000       |20321         |3134      |895             |1004            |1400            |1400            |500                    |1500                   |1666              |6465           |13064     |19529         |
+|Gross Salary|Taxable Income|Income Tax|Health Insurance|Social Insurance|Employee Pension|Employer Pension|Employee Education Fund|Employer Education Fund|Employer Severance|Overall Savings|Net Income|Overall Income|
 |21000       |21396         |3499      |949             |1079            |1470            |1470            |525                    |1575                   |1749              |6789           |13476     |20265         |
 |22000       |22471         |3875      |1003            |1155            |1540            |1540            |550                    |1650                   |1832              |7112           |13876     |20988         |
 |23000       |23546         |4251      |1057            |1230            |1610            |1610            |575                    |1725                   |1915              |7435           |14275     |21710         |
@@ -125,8 +124,8 @@ Here's an example for the content of the `result.json`:
 |27000       |27846         |5756      |1272            |1531            |1890            |1890            |675                    |2025                   |2249              |8729           |15874     |24603         |
 |28000       |28921         |6132      |1325            |1606            |1960            |1960            |700                    |2100                   |2332              |9052           |16274     |25326         |
 |29000       |30048         |6527      |1382            |1685            |2030            |2030            |725                    |2175                   |2415              |9375           |16649     |26024         |
-|Gross Salary|Taxable Income|Income Tax|Health Insurance|Social Insurance|Employee Pension|Employer Pension|Employee Education Fund|Employer Education Fund|Employer Severance|Overall Savings|Net Income|Overall Income|
 |30000       |31193         |6928      |1439            |1765            |2100            |2100            |750                    |2250                   |2499              |9699           |17016     |26715         |
+|Gross Salary|Taxable Income|Income Tax|Health Insurance|Social Insurance|Employee Pension|Employer Pension|Employee Education Fund|Employer Education Fund|Employer Severance|Overall Savings|Net Income|Overall Income|
 |31000       |32338         |7328      |1496            |1845            |2170            |2170            |775                    |2325                   |2582              |10022          |17383     |27405         |
 |32000       |33483         |7729      |1553            |1925            |2240            |2240            |800                    |2400                   |2665              |10345          |17750     |28095         |
 |33000       |34628         |8130      |1611            |2006            |2310            |2310            |825                    |2475                   |2748              |10668          |18117     |28785         |
@@ -136,8 +135,8 @@ Here's an example for the content of the `result.json`:
 |37000       |39382         |9794      |1848            |2338            |2590            |2590            |925                    |2775                   |3082              |11962          |19502     |31464         |
 |38000       |40611         |10224     |1910            |2424            |2660            |2660            |950                    |2850                   |3165              |12285          |19830     |32115         |
 |39000       |41839         |10654     |1971            |2510            |2730            |2730            |975                    |2925                   |3248              |12608          |20158     |32766         |
-|Gross Salary|Taxable Income|Income Tax|Health Insurance|Social Insurance|Employee Pension|Employer Pension|Employee Education Fund|Employer Education Fund|Employer Severance|Overall Savings|Net Income|Overall Income|
 |40000       |43067         |11102     |2033            |2596            |2800            |2800            |1000                   |3000                   |3332              |12931          |20467     |33398         |
+|Gross Salary|Taxable Income|Income Tax|Health Insurance|Social Insurance|Employee Pension|Employer Pension|Employee Education Fund|Employer Education Fund|Employer Severance|Overall Savings|Net Income|Overall Income|
 |41000       |44295         |11680     |2094            |2682            |2870            |2870            |1025                   |3075                   |3415              |13255          |20647     |33902         |
 |42000       |45524         |12257     |2133            |2737            |2940            |2940            |1050                   |3150                   |3498              |13578          |20881     |34459         |
 |43000       |46752         |12834     |2133            |2737            |3010            |3010            |1075                   |3225                   |3581              |13901          |21209     |35110         |
@@ -147,7 +146,6 @@ Here's an example for the content of the `result.json`:
 |47000       |51665         |15143     |2133            |2737            |3290            |3290            |1175                   |3525                   |3915              |15195          |22520     |37715         |
 |48000       |52894         |15721     |2133            |2737            |3360            |3360            |1200                   |3600                   |3998              |15518          |22847     |38365         |
 |49000       |54122         |16298     |2133            |2737            |3430            |3430            |1225                   |3675                   |4081              |15841          |23175     |39016         |
-|Gross Salary|Taxable Income|Income Tax|Health Insurance|Social Insurance|Employee Pension|Employer Pension|Employee Education Fund|Employer Education Fund|Employer Severance|Overall Savings|Net Income|Overall Income|
 |50000       |55350         |16878     |2133            |2737            |3500            |3500            |1250                   |3750                   |4165              |16164          |23500     |39664         |
 
 ### Relevant Documentation
