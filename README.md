@@ -68,6 +68,9 @@ and in the source code and documentation you can learn what exactly happens to y
 
 Updated to 2022 Tax Brackets. All the numbers are in Israeli Shekels ₪.
 
+<img src="static/graph.png" alt="Email Notification" width="640" height="480">
+
+
 | Gross Salary        | Overall Income        | Net Income        | Overall Savings        | Taxable Income        | Income Tax        | Health Insurance        | Social Insurance        | Employee Pension        | Employer Pension        | Employee Education Fund        | Employer Education Fund        | Employer Severance        |
 |---------------------|-----------------------|-------------------|------------------------|-----------------------|-------------------|-------------------------|-------------------------|-------------------------|-------------------------|--------------------------------|--------------------------------|---------------------------|
 | <b>1000        </b> | <b>1193          </b> | <b>880       </b> | <b>313            </b> | 1000                  | 0                 | 31                      | 4                       | 60                      | 70                      | 25                             | 75                             | 83                        |
