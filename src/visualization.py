@@ -35,9 +35,9 @@ def create_table():
                   'Employer Education Fund', 'Employer Severance')
         writer.writerow(titles)
         rewrite_titles_counter = 1
-        for gross_salary in np.arange(1000, 51000, 1000):
+        for gross_salary in np.arange(1000, 101000, 1000):
             writer.writerow(_get_salary_details(gross_salary))
-            if rewrite_titles_counter % 10 == 0 and gross_salary != 50000:
+            if rewrite_titles_counter % 10 == 0 and gross_salary != 100000:
                 writer.writerow(titles)
             rewrite_titles_counter += 1
 
