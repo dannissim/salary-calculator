@@ -56,7 +56,7 @@ and in the source code and documentation you can learn what exactly happens to y
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## Manual Usage
+### Manual Usage
 
 1. Create a virtual environment (optional):  
     a. `python -m venv venv`  
@@ -64,7 +64,7 @@ and in the source code and documentation you can learn what exactly happens to y
 2. Install the requirements: `pip install -r requirements.txt`
 3. Run `python salary_calculator.py`
 
-### Results
+## Results
 
 Updated to 2022 Tax Brackets. All the numbers are in Israeli Shekels ₪.
 
@@ -142,9 +142,9 @@ Updated to 2022 Tax Brackets. All the numbers are in Israeli Shekels ₪.
 * [פטור ממס הכנסה על הפרשות המעסיק לקרן השלתמות של העובד](https://www.kolzchut.org.il/he/%D7%A7%D7%A8%D7%9F_%D7%94%D7%A9%D7%AA%D7%9C%D7%9E%D7%95%D7%AA#.D7.A4.D7.98.D7.95.D7.A8_.D7.9E.D7.9E.D7.A1_.D7.94.D7.9B.D7.A0.D7.A1.D7.94)
 
 ### Notes
-* Notice the difference between ניכוי ממס and זיכוי ממס. The difference is:  
-  * ניכוי ממס:  The relevant sum isn't included in the gross salary at all - so it also doesn't get taxed/ insurance isn't paid for this sum.
-  * זיכוי ממס: This means that the regarded sum grants you a discount off the initial income tax. Ex: You are supposed to pay ₪1000 in income tax but you received a discount of ₪200, then you only need to pay ₪800.
+* Notice the difference between ניכוי ממס and זיכוי ממס. The difference is:
+  * a. ניכוי ממס:  The relevant sum isn't included in the gross salary at all - so it also doesn't get taxed/ insurance isn't paid for this sum.
+  * b. זיכוי ממס: This means that the regarded sum grants you a discount off the initial income tax. Ex: You are supposed to pay ₪1000 in income tax but you received a discount of ₪200, then you only need to pay ₪800.
 
 <!-- CONTRIBUTING -->
 ## Contributing
