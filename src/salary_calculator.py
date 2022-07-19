@@ -67,9 +67,8 @@ def calculate_net_income(gross_salary: int) -> int:
     social_insurance_fee = calculate_sum_of_brackets(salary_to_calculate_insurance_fee,
                                                      SOCIAL_INSURANCE_BRACKETS)
     employee_deductions = gross_salary * (EMPLOYEE_PENSION_RATE + EMPLOYEE_EDUCATION_FUND_RATE)
-    x = int(gross_salary - income_tax - health_insurance_fee - social_insurance_fee -
-            employee_deductions)
-    return x
+    return int(gross_salary - income_tax - health_insurance_fee - social_insurance_fee -
+               employee_deductions)
 
 
 def calculate_savings(gross_salary: int) -> int:
@@ -109,5 +108,5 @@ def calculate_sum_of_brackets(number: float, brackets: typing.Iterable[Bracket])
 
 
 if __name__ == '__main__':
-    gross_salary_from_user = int(input("enter gross salary \n"))
+    gross_salary_from_user = int(input("Enter the gross salary:\n"))
     print(main(gross_salary_from_user))
