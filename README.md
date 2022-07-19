@@ -43,8 +43,7 @@
 ## About The Project
 Do you wonder where exactly your money goes, if you have a given gross salary?  
 Many of the online resources are confusing, and many of the online calculators are too complicated to use.  
-The aim of this project is to bridge those gaps.  
-Below you can see all the details per gross salary,   
+The aim of this project is to bridge those gaps. Below you can see all the details per gross salary, 
 and in the source code and documentation you can learn what exactly happens to you gross salary.
   <p align="right">(<a href="#top">back to top</a>)</p>
 
