@@ -27,9 +27,8 @@
 
 <h3 align="center">Salary Calculator</h3>
 
-[//]: # (TODO)
-  This app calculates how much of a new deposit to invest in each asset,  
-  in order to keep your portfolio as balanced as possible.
+  This app calculates all the payments made given a gross salary, 
+  in order to know what to expect to see in a paycheck.
   <p align="center">
     <br />
     <a href="https://github.com/dannissim/salary-calculator/issues">Report Bug</a>
@@ -42,21 +41,12 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-[//]: # (TODO)
-app that calculates your monthly salary and your savings after taking off by-law expenses: Pension savings,
-"Keren hishtalmut", Health insurance, income tax, social insurance.
-Suppose you have a self-managed portfolio, and each month you add a portion of your income to your portfolio.
-Suppose as well that you have a target asset allocation. For example:  
-| Asset | Target Allocation |
-|-------|-------------------|
-| VTI   | 64%               |
-| VXUS  | 16%               |
-| BND   | 20%               |  
-
-Using this app you will know how much of each asset to invest in order to be as close as possible 
-to your target allocation - without selling any of your current assets.
-<p align="right">(<a href="#top">back to top</a>)</p>
-
+Do you wonder where exactly your money goes, if you have a given gross salary?  
+Many of the online resources are confusing, and many of the online calculators are too complicated to use.  
+The aim of this project is to bridge those gaps.  
+Below you can see all the details per gross salary,   
+and in the source code and documentation you can learn what exactly happens to you gross salary.
+  <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 ### Built With
@@ -67,30 +57,17 @@ to your target allocation - without selling any of your current assets.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## Usage
+## Manual Usage
 
-[//]: # (TODO)
-1. Fill `input.json` with:
-   1. `target_allocation` - the percent you would like each asset to be in your portfolio.
-   2. `deposit_amount` - how many dollars you are adding to your portfolio.
-   3. `current_holdings` - How much do you have of each asset currently in your portfolio. 
-2. Create a virtual environment (optional):  
+1. Create a virtual environment (optional):  
     a. `python -m venv venv`  
     b. `venv\Scripts\activate` or in linux `source venv/bin/activate`
-3. Install the requirements: `pip install -r requirements.txt`
-4. Set the environment variable API_KEY to your Free financial modeling prep API key.
-5. Run `python main.py`
-6. Then the result will appear in a newly created file `result.json`. 
+2. Install the requirements: `pip install -r requirements.txt`
+3. Run `python salary_calculator.py`
 
 ### Results
 
-[//]: # (TODO)
-This app calculates the difference between your portfolio and the portfolio which has the same
-market value but with the target allocation, then recommends you to buy the assets in such a way
-that brings your portfolio as close as possible to the target portfolio allocation.  
-You're welcome to take a look at the [`input.json`](input.json) currently in the repository.  
-Here's an example for the content of the `result.json`:  
-All of the numbers are in Israeli Shekels ₪.
+Updated to 2022 Tax Brackets. All the numbers are in Israeli Shekels ₪.
 
 | Gross Salary        | Overall Income        | Net Income        | Overall Savings        | Taxable Income        | Income Tax        | Health Insurance        | Social Insurance        | Employee Pension        | Employer Pension        | Employee Education Fund        | Employer Education Fund        | Employer Severance        |
 |---------------------|-----------------------|-------------------|------------------------|-----------------------|-------------------|-------------------------|-------------------------|-------------------------|-------------------------|--------------------------------|--------------------------------|---------------------------|
