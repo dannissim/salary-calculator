@@ -37,7 +37,7 @@ MAX_PENSION_DEPOSIT_TO_RECEIVE_TAX_DEDUCTION = 623.0
 
 # These values may change from person to person
 
-EMPLOYEE_PENSION_RATE = 0.07
+EMPLOYEE_PENSION_RATE = 0.06
 EMPLOYER_PENSION_RATE = 0.07
 DISCOUNT_POINTS = 2.25
 
@@ -48,7 +48,8 @@ EMPLOYEE_EDUCATION_FUND_RATE = 0.025
 EMPLOYER_EDUCATION_FUND_RATE = 0.075
 EMPLOYER_SEVERANCE_RATE = 0.0833
 DISCOUNT = DISCOUNT_POINTS * DISCOUNT_POINT_WORTH
-MAX_NONTAXABLE_EMPLOYER_EDUCATION_FUND = EMPLOYER_EDUCATION_FUND_RATE * MAX_SALARY_WITHOUT_TAX_ON_EMPLOYER_EDUCATION_FUND
+MAX_NONTAXABLE_EMPLOYER_EDUCATION_FUND = EMPLOYER_EDUCATION_FUND_RATE * \
+                                         MAX_SALARY_WITHOUT_TAX_ON_EMPLOYER_EDUCATION_FUND
 
 
 def main(gross_salary: int):
@@ -58,17 +59,17 @@ def main(gross_salary: int):
 
 
 def calculate_net_income(gross_salary: int) -> int:
-    gross_salary_with_additions = _calculate_gross_salary_with_additions(gross_salary)
-    income_tax = _calculate_income_tax(gross_salary_with_additions)
-    salary_to_calculate_insurance_fee = min(gross_salary_with_additions,
-                                            MAX_SALARY_TO_CALCULATE_INSURANCE_FEE)
-    health_insurance_fee = _calculate_sum_of_brackets(salary_to_calculate_insurance_fee,
-                                                      HEALTH_INSURANCE_BRACKETS)
-    social_insurance_fee = _calculate_sum_of_brackets(salary_to_calculate_insurance_fee,
-                                                      SOCIAL_INSURANCE_BRACKETS)
+    taxable_income = calculate_taxable_income(gross_salary)
+    income_tax = calculate_income_tax(taxable_income)
+    salary_to_calculate_insurance_fee = min(taxable_income, MAX_SALARY_TO_CALCULATE_INSURANCE_FEE)
+    health_insurance_fee = calculate_sum_of_brackets(salary_to_calculate_insurance_fee,
+                                                     HEALTH_INSURANCE_BRACKETS)
+    social_insurance_fee = calculate_sum_of_brackets(salary_to_calculate_insurance_fee,
+                                                     SOCIAL_INSURANCE_BRACKETS)
     employee_deductions = gross_salary * (EMPLOYEE_PENSION_RATE + EMPLOYEE_EDUCATION_FUND_RATE)
-    return int(gross_salary - income_tax - health_insurance_fee - social_insurance_fee -
-               employee_deductions)
+    x = int(gross_salary - income_tax - health_insurance_fee - social_insurance_fee -
+            employee_deductions)
+    return x
 
 
 def calculate_savings(gross_salary: int) -> int:
@@ -77,9 +78,9 @@ def calculate_savings(gross_salary: int) -> int:
                 EMPLOYER_EDUCATION_FUND_RATE + EMPLOYER_PENSION_RATE + EMPLOYER_SEVERANCE_RATE))
 
 
-def _calculate_income_tax(gross_salary_with_additions: float) -> float:
-    income_tax_without_deductions = _calculate_sum_of_brackets(gross_salary_with_additions,
-                                                               INCOME_TAX_BRACKETS)
+def calculate_income_tax(gross_salary_with_additions: float) -> float:
+    income_tax_without_deductions = calculate_sum_of_brackets(gross_salary_with_additions,
+                                                              INCOME_TAX_BRACKETS)
     tax_deduction_from_pension_deposit = TAX_DEDUCTION_RATE_FROM_PENSION_DEPOSIT * min(
         MAX_PENSION_DEPOSIT_TO_RECEIVE_TAX_DEDUCTION,
         gross_salary_with_additions * EMPLOYEE_PENSION_RATE)
@@ -87,17 +88,18 @@ def _calculate_income_tax(gross_salary_with_additions: float) -> float:
     return max(income_tax, 0)
 
 
-def _calculate_gross_salary_with_additions(gross_salary: float) -> float:
+def calculate_taxable_income(gross_salary: float) -> float:
     employer_pension_to_be_taxed = max(
         0.0, gross_salary * EMPLOYEE_PENSION_RATE - MAX_NONTAXABLE_EMPLOYER_PENSION)
     severance_to_be_taxed = max(
         0.0, gross_salary * EMPLOYER_SEVERANCE_RATE - MAX_NONTAXABLE_EMPLOYER_SEVERANCE)
     employer_education_fund_to_be_taxed = max(
         0.0, gross_salary * EMPLOYER_EDUCATION_FUND_RATE - MAX_NONTAXABLE_EMPLOYER_EDUCATION_FUND)
-    return gross_salary + employer_pension_to_be_taxed + severance_to_be_taxed + employer_education_fund_to_be_taxed
+    return gross_salary + employer_pension_to_be_taxed + \
+           severance_to_be_taxed + employer_education_fund_to_be_taxed
 
 
-def _calculate_sum_of_brackets(number: float, brackets: typing.Iterable[Bracket]) -> float:
+def calculate_sum_of_brackets(number: float, brackets: typing.Iterable[Bracket]) -> float:
     relevant_brackets = [bracket for bracket in brackets if bracket.threshold < number]
     relevant_brackets.append(Bracket(threshold=number, rate=0))  # this rate isn't used
     result = 0
